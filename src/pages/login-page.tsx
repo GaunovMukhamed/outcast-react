@@ -1,6 +1,11 @@
+import { Button } from 'primereact/button'; 
+
 const LoginPage: React.FC = (props: any) => {
   return(
-    <div>Login Page</div>
+    <div className='w-full h-full bg-primary'>
+      {/* <Button label="Submit" /> */}
+      asd
+    </div>
   )
 }
 
