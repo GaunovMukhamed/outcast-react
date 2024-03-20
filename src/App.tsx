@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { LoginPage } from './pages/login-page';
+import { LoginPage } from './pages/login-page/login-page';
 import { PrimeReactProvider } from 'primereact/api';
 import './App.scss';
 
