@@ -1,24 +1,27 @@
 import { Button } from 'primereact/button'; 
 import { InputText } from 'primereact/inputtext';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { loginUser } from './login.service';
 import { SuccessResponse } from '../../models';
 import { Spinner } from '../../components/spinner';
+import { Toast } from 'primereact/toast';
         
 const LoginPage: React.FC = (props: any) => {
 
   const [login, setLogin] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
+  const toast = useRef<Toast>(null);
+
   const onSubmit = (event: any): void => {
     event.preventDefault();
     setLoading(true);
     loginUser(login)
       .then((response: SuccessResponse) => {
-        console.log(response)
+        toast.current!.show({ severity: 'success', summary: 'Успешно', detail: response.message });
       })
       .catch((error: any) => {
-        console.log(error)
+        toast.current!.show({ severity: 'error', summary: 'Ошибка', detail: error.message });
       })
       .finally(() => setLoading(false))
   }
@@ -36,6 +39,7 @@ const LoginPage: React.FC = (props: any) => {
         <Button label="Войти" type='submit' />
       </form>
       { loading ? <Spinner  /> : '' }
+      <Toast ref={toast} />
     </div>
   )
 }
