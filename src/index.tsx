@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import './tools/axios.interceptor';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
