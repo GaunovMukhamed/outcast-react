@@ -3,6 +3,7 @@ import { LoginPage } from './pages/login-page/login-page';
 import { PrimeReactProvider } from 'primereact/api';
 import './App.scss';
 import { AxiosInterceptor } from './tools/axios.interceptor';
+import { CharacterSelectionPage } from './pages/character-selection-page/character-selection-page';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/game">
+                <Route path="characters" element={<CharacterSelectionPage />} />
+              </Route>
               <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
           </BrowserRouter>

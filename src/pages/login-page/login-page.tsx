@@ -1,21 +1,36 @@
 import { Button } from 'primereact/button'; 
 import { InputText } from 'primereact/inputtext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loginUser } from './login.service';
 import { SuccessResponse } from '../../models';
 import { Spinner } from '../../components/spinner';
+import { getUserLoginFromStorage, setUserLoginToStorage } from '../../tools/general.tools';
+import { useNavigate } from 'react-router-dom';
         
 const LoginPage: React.FC = (props: any) => {
 
+  const navigate = useNavigate();
+
   const [login, setLogin] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    checkAuth();
+  }, [])
+
+  const checkAuth = (): void => {
+    if(getUserLoginFromStorage()) {
+      navigate("/game");
+    }
+  }
 
   const onSubmit = (event: any): void => {
     event.preventDefault();
     setLoading(true);
     loginUser(login)
       .then((response: SuccessResponse) => {
-        console.log('logged!')
+        setUserLoginToStorage(login);
+        navigate("/game");
       })
       .catch((error: any) => {
         // toast.current!.show({ severity: 'error', summary: 'Ошибка', detail: error.message });

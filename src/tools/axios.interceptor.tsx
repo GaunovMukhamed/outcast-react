@@ -22,7 +22,8 @@ const AxiosInterceptor: React.FC<AxiosProps> = ({children}) => {
   const setAxiosInterceptors = (): void => {
     axios.interceptors.response.use(
       (response: AxiosResponse) => {
-        toast.current!.show({ severity: 'success', summary: 'Успешно', detail: response.data.message });
+        if(Object.keys(response.data).length === 1 && response.data.message)
+          toast.current!.show({ severity: 'success', summary: 'Успешно', detail: response.data.message });
         return response.data;
       }, 
       (error: AxiosError) => {
