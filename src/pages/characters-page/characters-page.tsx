@@ -16,13 +16,17 @@ const CharactersPage: React.FC = (props: any) => {
     setLoading(true);
     getCharacters(getLoginFromStorage()!)
       .then((characters: Character[]) => {
+        console.log('asd')
+        setCharacters(characters);
       })
       .catch((error) => {})
       .finally(() => setLoading(false))
   }
 
   return(
-    <div>selection</div>
+    <div className="w-full h-full flex justify-content-center align-items-center">
+      <div>asd</div>
+    </div>
   )
 }
 

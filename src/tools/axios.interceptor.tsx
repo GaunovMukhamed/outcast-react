@@ -1,6 +1,11 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef } from 'react';
+
+const address: string = process.env.REACT_APP_API_ADDRESS!;
+export const http: AxiosInstance = axios.create({
+  baseURL: address
+});
 
 interface AxiosProps {
   children: any;
@@ -15,9 +20,7 @@ const AxiosInterceptor: React.FC<AxiosProps> = ({children}) => {
   const toast = useRef<Toast>(null);
 
   const setAxiosInterceptors = (): void => {
-    const address: string = process.env.REACT_APP_API_ADDRESS!;
-    axios.defaults.baseURL = address;
-    axios.interceptors.response.use(
+    http.interceptors.response.use(
       (response: AxiosResponse) => {
         if(Object.keys(response.data).length === 1 && response.data.message)
           toast.current!.show({ severity: 'success', summary: 'Успешно', detail: response.data.message });

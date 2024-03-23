@@ -1,6 +1,6 @@
-import axios from "axios";
 import { SuccessResponse } from "../../models";
+import { http } from "../../tools/axios.interceptor";
 
 export const loginUser = (login: string): Promise<SuccessResponse> => {
-  return axios.post('/users/login', { login })
+  return http.post('/users/login', { login })
 }
