@@ -1,17 +1,21 @@
 import { useEffect } from "react"
+import { getCharacterFromStorage } from "../../tools/general.tools";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const GamePage: React.FC = (props: any) => {
+const GamePage: React.FC<any> = (props) => {
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkSelectedCharacter();
   }, [])
 
   const checkSelectedCharacter = (): void => {
-    console.log('asd');
+    if(!getCharacterFromStorage()) navigate('/game/characters');
   }
 
   return(
-    <div>game</div>
+    <Outlet />
   )
 }
 

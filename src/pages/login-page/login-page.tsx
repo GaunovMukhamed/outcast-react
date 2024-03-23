@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { loginUser } from './login.service';
 import { SuccessResponse } from '../../models';
 import { Spinner } from '../../components/spinner';
-import { getUserLoginFromStorage, setUserLoginToStorage } from '../../tools/general.tools';
+import { getLoginFromStorage, saveLoginToStorage } from '../../tools/general.tools';
 import { useNavigate } from 'react-router-dom';
         
 const LoginPage: React.FC = (props: any) => {
@@ -19,7 +19,7 @@ const LoginPage: React.FC = (props: any) => {
   }, [])
 
   const checkAuth = (): void => {
-    if(getUserLoginFromStorage()) {
+    if(getLoginFromStorage()) {
       navigate("/game");
     }
   }
@@ -29,11 +29,8 @@ const LoginPage: React.FC = (props: any) => {
     setLoading(true);
     loginUser(login)
       .then((response: SuccessResponse) => {
-        setUserLoginToStorage(login);
+        saveLoginToStorage(login);
         navigate("/game");
-      })
-      .catch((error: any) => {
-        // toast.current!.show({ severity: 'error', summary: 'Ошибка', detail: error.message });
       })
       .finally(() => setLoading(false))
   }
