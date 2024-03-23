@@ -32,6 +32,7 @@ const LoginPage: React.FC = (props: any) => {
         saveLoginToStorage(login);
         navigate("/game");
       })
+      .catch((error) => {})
       .finally(() => setLoading(false))
   }
 

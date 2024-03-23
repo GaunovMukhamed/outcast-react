@@ -1,11 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Divider } from 'primereact/divider';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef } from 'react';
-
-// let instance: AxiosInstance = axios.create({
-//   baseURL: "https://example.com"
-// }) 
 
 interface AxiosProps {
   children: any;
@@ -20,6 +15,8 @@ const AxiosInterceptor: React.FC<AxiosProps> = ({children}) => {
   const toast = useRef<Toast>(null);
 
   const setAxiosInterceptors = (): void => {
+    const address: string = process.env.REACT_APP_API_ADDRESS!;
+    axios.defaults.baseURL = address;
     axios.interceptors.response.use(
       (response: AxiosResponse) => {
         if(Object.keys(response.data).length === 1 && response.data.message)
@@ -31,7 +28,7 @@ const AxiosInterceptor: React.FC<AxiosProps> = ({children}) => {
           error.response ?
             (error.response.data! as any).message :
             'Ошибка подключения к серверу' });
-        return Promise.reject(error.response?.data);
+        return Promise.reject(error);
       }
     );
   }

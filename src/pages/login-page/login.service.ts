@@ -1,8 +1,6 @@
 import axios from "axios";
 import { SuccessResponse } from "../../models";
 
-const address: string = process.env.REACT_APP_API_ADDRESS!;
-
 export const loginUser = (login: string): Promise<SuccessResponse> => {
-  return axios.post(address + '/users/login', { login })
+  return axios.post('/users/login', { login })
 }
