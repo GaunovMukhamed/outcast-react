@@ -7,6 +7,7 @@ import { CharactersPage } from './pages/characters-page/characters-page';
 import { GamePage } from './pages/game-page/game-page';
 import { CharacterCreationPage } from './pages/character-creation-page/character-creation-page';
 import { getLoginFromStorage } from './tools/general.tools';
+import Protected from './tools/protectedRoute';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/game" element={authProtect(<GamePage />)}>
+              <Route path="/game" element={<Protected><GamePage /></Protected>}>
                 <Route path="characters" element={<CharactersPage />} />
                 <Route path="create" element={<CharacterCreationPage />} />
               </Route>
