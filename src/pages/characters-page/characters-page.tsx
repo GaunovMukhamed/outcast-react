@@ -7,6 +7,7 @@ import { CharacterItem } from "./character-item";
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 import { ScrollPanel } from 'primereact/scrollpanel';
+import { Link } from "react-router-dom";
         
 const CharactersPage: React.FC = (props: any) => {
 
@@ -35,7 +36,7 @@ const CharactersPage: React.FC = (props: any) => {
             return <CharacterItem key={character._id} characterInfo={character} className="mb-2" />
           })}
         </ScrollPanel>
-        <Button label="Создать" className="w-full mt-2" />
+        <Link to="/game/creation"><Button label="Создать" className="w-full mt-2" /></Link>
       </Panel>
       {loading ? <Spinner /> : ''}
     </div>

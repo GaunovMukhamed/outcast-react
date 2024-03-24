@@ -1,6 +1,6 @@
 const CharacterCreationPage: React.FC = (props: any) => {
   return(
-    <div>selection</div>
+    <div>creation</div>
   )
 }
 

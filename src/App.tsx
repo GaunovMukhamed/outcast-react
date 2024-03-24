@@ -29,7 +29,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/game" element={<Protected><GamePage /></Protected>}>
                 <Route path="characters" element={<CharactersPage />} />
-                <Route path="create" element={<CharacterCreationPage />} />
+                <Route path="creation" element={<CharacterCreationPage />} />
               </Route>
               <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
