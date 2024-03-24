@@ -3,8 +3,11 @@ import { getCharacters } from "./characters.service";
 import { Character } from "../../models";
 import { getLoginFromStorage } from "../../tools/general.tools";
 import { Spinner } from "../../components/spinner";
-import { http } from "../../tools/axios.interceptor";
-
+import { CharacterItem } from "./character-item";
+import { Panel } from 'primereact/panel';
+import { Button } from 'primereact/button';
+import { ScrollPanel } from 'primereact/scrollpanel';
+        
 const CharactersPage: React.FC = (props: any) => {
 
   useEffect(() => {
@@ -26,11 +29,14 @@ const CharactersPage: React.FC = (props: any) => {
 
   return(
     <div className="w-full h-full flex justify-content-center align-items-center">
-      <div>
-        {characters.map((character: Character) => {
-          return <div key={character._id}>{character.login}</div>
-        })}
-      </div>
+      <Panel header="Персонажи" className="w-8 max-h-20rem">
+        <ScrollPanel style={{ width: '100%', height: '10rem' }}>
+          {characters.map((character: Character) => {
+            return <CharacterItem key={character._id} characterInfo={character} className="mb-2" />
+          })}
+        </ScrollPanel>
+        <Button label="Создать" className="w-full mt-2" />
+      </Panel>
       {loading ? <Spinner /> : ''}
     </div>
   )

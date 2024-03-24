@@ -15,8 +15,6 @@ const AxiosInterceptor: React.FC<AxiosProps> = ({children}) => {
 
   const toast = useRef<Toast>(null);
 
-  console.log('intercept')
-
   http.interceptors.response.use(
     (response: AxiosResponse) => {
       if(Object.keys(response.data).length === 1 && response.data.message)

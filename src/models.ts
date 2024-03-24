@@ -5,4 +5,7 @@ export interface SuccessResponse {
 export interface Character {
   _id: string;
   login: string;
+  name: string;
+  level: number;
+  race: string;
 }
