@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { getCharacters } from "./characters.service";
 import { Character } from "../../models";
 import { getLoginFromStorage } from "../../tools/general.tools";
+import { Spinner } from "../../components/spinner";
+import { http } from "../../tools/axios.interceptor";
 
 const CharactersPage: React.FC = (props: any) => {
 
@@ -15,9 +17,8 @@ const CharactersPage: React.FC = (props: any) => {
   const getCharactersList = (): void => {
     setLoading(true);
     getCharacters(getLoginFromStorage()!)
-      .then((characters: Character[]) => {
-        console.log('asd')
-        setCharacters(characters);
+      .then((charactersList: Character[]) => {
+        setCharacters(charactersList);
       })
       .catch((error) => {})
       .finally(() => setLoading(false))
@@ -25,7 +26,12 @@ const CharactersPage: React.FC = (props: any) => {
 
   return(
     <div className="w-full h-full flex justify-content-center align-items-center">
-      <div>asd</div>
+      <div>
+        {characters.map((character: Character) => {
+          return <div key={character._id}>{character.login}</div>
+        })}
+      </div>
+      {loading ? <Spinner /> : ''}
     </div>
   )
 }

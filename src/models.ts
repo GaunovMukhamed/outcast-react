@@ -3,5 +3,6 @@ export interface SuccessResponse {
 }
 
 export interface Character {
-  
+  _id: string;
+  login: string;
 }
