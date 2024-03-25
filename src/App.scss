@@ -5,3 +5,14 @@
 body {
   background-color: var(--surface-300);
 }
+
+.p-panel {
+  display: flex;
+  flex-direction: column;
+  .p-toggleable-content {
+    flex: 1;
+    .p-panel-content {
+      height: 100%;
+    }
+  }
+}
